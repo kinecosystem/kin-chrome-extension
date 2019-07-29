@@ -1,0 +1,11 @@
+{
+  "name": "Kin Extention",
+  "version": "1.0",
+  "description": "",
+  "permissions": ["storage", "declarativeContent"],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "manifest_version": 2
+}
