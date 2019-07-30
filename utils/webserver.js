@@ -29,7 +29,11 @@ var server =
     hot: true,
     contentBase: path.join(__dirname, "../build"),
     headers: { "Access-Control-Allow-Origin": "*" },
-    disableHostCheck: true
+    disableHostCheck: true,
+    port:8081,
+    proxy:{
+      "/create": "http://localhost:8080/create"
+    }
   });
 
 server.listen(env.PORT);

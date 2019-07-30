@@ -18,5 +18,14 @@ module.exports = merge(common, {
         chunks: ["index"]
       }),
       new WriteFilePlugin()
-    ]
+    ],
+    devServer: {
+        contentBase: './build',
+        hot: true,
+        port: 8081,
+        open: true,
+        proxy: {
+            "/create": "http://localhost:8080"
+        }
+    }
   });
