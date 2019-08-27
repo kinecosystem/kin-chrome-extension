@@ -16,8 +16,6 @@ chrome.runtime.onMessageExternal.addListener(
 
 chrome.runtime.onInstalled.addListener(function (details) {
     if ((details.reason === 'install') || (details.reason === 'update')) {
-        chrome.tabs.create({ url: "./post_install/index.html" }, function (tab) {
-            console.log("New tab launched with ./post_install/index.html");
-        });
+        chrome.tabs.create({ url: "./post_install/index.html" });
     }
 }); 

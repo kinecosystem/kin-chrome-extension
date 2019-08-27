@@ -29,12 +29,20 @@ module.exports = {
                 ]
             }, {
                 test: /\.vue$/,
-                use: 'vue-loader'
+                use: 'vue-loader',
             }
         ]
     },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        },
+        extensions: ['*', '.js', '.vue', '.json']
+    },
     plugins: [
-        new VueLoaderPlugin(),
+        new VueLoaderPlugin({
+
+        }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, srcDir + 'index.ejs')
         }),
