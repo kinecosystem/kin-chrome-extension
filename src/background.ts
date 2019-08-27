@@ -4,8 +4,6 @@ import { SimpleKeystoreProvider } from '@kinecosystem/kin-sdk-js-keystore-provid
 const keystoreProvider = new SimpleKeystoreProvider(KinSdk);
 const client = new KinSdk.KinClient(KinSdk.Environment.Testnet, keystoreProvider);
 
-console.log(keystoreProvider);
-console.log(client);
 
 chrome.runtime.onMessageExternal.addListener(
     function (request, _, sendResponse) {
@@ -16,6 +14,6 @@ chrome.runtime.onMessageExternal.addListener(
 
 chrome.runtime.onInstalled.addListener(function (details) {
     if ((details.reason === 'install') || (details.reason === 'update')) {
-        chrome.tabs.create({ url: "./post_install/index.html" });
+        chrome.tabs.create({ url: "./app/index.html" });
     }
 }); 

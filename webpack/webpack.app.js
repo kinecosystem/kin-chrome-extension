@@ -4,12 +4,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const path = require('path');
-const srcDir = '../src/post_install/';
+const srcDir = '../src/app/';
 
 module.exports = {
     entry: path.join(__dirname, srcDir + 'main.js'),
     output: {
-        path: path.join(__dirname, '../dist/post_install'),
+        path: path.join(__dirname, '../dist/app'),
         filename: '[name].js'
     },
     module: {
@@ -48,11 +48,11 @@ module.exports = {
         }),
         new CopyWebpackPlugin([{
             from: path.join(__dirname, srcDir + 'assets'),
-            to: path.join(__dirname, '..dist/post_install/assets'),
+            to: path.join(__dirname, '..dist/app/assets'),
             toType: 'dir'
         }]),
         new MiniCssExtractPlugin({
-            path: path.join(__dirname, '../dist/post_install/main.css')
+            path: path.join(__dirname, '../dist/app/main.css')
         })
     ]
 }
