@@ -10,6 +10,6 @@ chrome.runtime.onMessageExternal.addListener(function(request, _, sendResponse) 
 
 chrome.runtime.onInstalled.addListener(function(details) {
   if (details.reason === 'install' || details.reason === 'update') {
-    chrome.tabs.create({ url: './app/index.html' });
+    chrome.tabs.create({ url: './app/pages/setup.html' });
   }
 });

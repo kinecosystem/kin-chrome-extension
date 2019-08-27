@@ -7,7 +7,7 @@ export default {
   props: {
     value: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   computed: {
@@ -16,7 +16,7 @@ export default {
         // Pass all component listeners directly to input
         ...this.$listeners,
         // Override input listener to work with v-model
-        input: event => this.$emit("input", event.target.value)
+        input: event => this.$emit('input', event.target.value)
       };
     }
   }
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../variables.scss";
+@import '../assets/variables.scss';
 
 .input {
   width: 100%;
