@@ -16,19 +16,17 @@
   },
 
   "web_accessible_resources": [
-    "js/post_install.js", "post_install.html"
+    "post_install/*"
   ],
 
   "externally_connectable": {
-    "matches": ["*://localhost/*"]
+    "matches": ["*://localhost/*", "*://127.0.0.1/*"]
   },
 
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["js/vendor.js", "js/content_script.js"]
-    }
-  ],
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["js/vendor.js", "js/content_script.js"]
+  }],
 
   "background": {
     "scripts": ["js/vendor.js", "js/background.js"]
