@@ -74,11 +74,9 @@ module.exports = {
         }),
         new CopyWebpackPlugin([{
             from: path.join(__dirname, srcDir + 'assets'),
-            to: path.join(__dirname, '..dist/app/assets'),
+            to: path.join(__dirname, '../dist/app/assets'),
             toType: 'dir'
         }]),
-        new MiniCssExtractPlugin({
-            path: path.join(__dirname, '../dist/app/main.css')
-        })
+        new MiniCssExtractPlugin()
     ]
 }
