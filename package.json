@@ -4,19 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-ext": "webpack --config webpack/webpack.prod.js --env.base=./webpack.ext.js --progress",
-    "build-post-install": "webpack --config webpack/webpack.prod.js --env.base=./webpack.app.js --progress",
-    "watch-ext": "webpack --config  webpack/webpack.dev.js --env.base=./webpack.ext.js --watch",
-    "watch-post-install": "webpack --config webpack/webpack.dev.js --env.base=./webpack.app.js --watch",
-    "build": "npm-run-all build-ext build-post-install",
-    "watch": "npm run watch-ext & npm run watch-post-install",
+    "build": "webpack --config webpack.prod.js --progress",
+    "watch": "webpack --config webpack.dev.js --watch",
     "clean": "rimraf dist"
   },
   "author": "Kin Ecosystem",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.5.5",
     "@types/chrome": "0.0.86",
     "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^3.2.0",
     "eslint": "^6.1.0",
@@ -28,6 +26,7 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "eslint-plugin-vue": "^5.2.3",
+    "file-loader": "^4.2.0",
     "html-webpack-plugin": "^4.0.0-beta.8",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.12.0",
@@ -41,8 +40,10 @@
     "vue-loader": "^15.7.1",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.10",
+    "webextension-polyfill": "^0.4.0",
     "webpack": "~4.17.2",
     "webpack-cli": "~3.1.0",
+    "webpack-extension-reloader": "^1.1.0",
     "webpack-merge": "~4.2.1"
   },
   "dependencies": {
