@@ -30,7 +30,7 @@
   ],
 
   "background": {
-    "scripts": ["background/index.js"]
+    "scripts": ["background/index.js", "vendor/index.js"]
   },
 
   "permissions": ["storage", "tabs", "cookies", "<all_urls>"]

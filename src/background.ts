@@ -10,8 +10,20 @@ chrome.runtime.onMessageExternal.addListener((request, _, sendResponse) => {
   }
 });
 
+chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
+  if (request.message === 'tip') {
+    sendResponse({ message: 'tip recived!' });
+    console.log(sender);
+    chrome.tabs.sendMessage((sender.tab as chrome.tabs.Tab).id || 0, { args: 'tip' }, cb);
+  }
+});
+
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install' || details.reason === 'update') {
     chrome.tabs.create({ url: './setup/index.html' });
   }
 });
+
+function cb(response) {
+  console.log('message from cs to bg: ' + response);
+}

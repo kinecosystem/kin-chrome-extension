@@ -6,6 +6,7 @@ module.exports = {
   env: {
     amd: true,
     browser: true,
-    node: true
-  },
+    node: true,
+    webextensions: true
+  }
 };

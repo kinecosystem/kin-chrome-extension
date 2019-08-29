@@ -5,9 +5,12 @@ global.browser = require('webextension-polyfill');
 Vue.prototype.$browser = global.browser;
 
 const anchor = document.createElement('div');
-document.body.prepend(anchor);
 
-new Vue({
-  el: anchor,
-  render: h => h(App)
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  document.body.prepend(anchor);
+  new Vue({
+    el: anchor,
+    render: h => h(App)
+  });
+  sendResponse('msg from cs');
 });

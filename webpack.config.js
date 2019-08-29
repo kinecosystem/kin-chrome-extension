@@ -48,6 +48,11 @@ module.exports = {
         use: 'vue-loader'
       },
       {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/
