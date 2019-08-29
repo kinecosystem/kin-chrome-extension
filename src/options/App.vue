@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <h1>Options</h1>
-    <router-view></router-view>
-  </div>
+  <p>Options</p>
 </template>
 
 <script>
@@ -14,9 +11,4 @@ export default {
 </script>
 
 <style lang="scss">
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
 </style>

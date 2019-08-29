@@ -2,87 +2,106 @@ const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
 
 module.exports = {
-    context: __dirname + '/src',
-    entry: {
-        'setup/setup': './setup/setup.js',
-        'options/options': './options/options.js',
-        'popup/popup': './popup/popup.js',
-        background: './background.ts',
-        content_script: './content_script.ts'
+  context: __dirname + '/src',
+  entry: {
+    setup: './setup/index.js',
+    options: './options/index.js',
+    popup: './popup/index.js',
+    'session-popup': './session-popup/index.js',
+    'content-script': './content_script.ts',
+    background: './background.ts'
+  },
+  output: {
+    path: __dirname + '/dist',
+    filename: '[name]/index.js'
+  },
+  resolve: {
+    alias: {
+      vue$: 'vue/dist/vue.esm.js'
     },
-    output: {
-        path: __dirname + '/dist',
-        filename: '[name].js'
-    },
-    resolve: {
-        alias: {
-            vue$: 'vue/dist/vue.esm.js'
-        },
-        extensions: ['*', '.js', '.vue', '.json', '.ts']
-    },
-    module: {
-        rules: [{
-                test: /\.vue$/,
-                use: 'vue-loader'
-            },
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            },
-            {
-                test: /\.scss$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]',
-                    outputPath: './assets/',
-                    emitFile: false
-                }
-            }
-        ]
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            global: 'window'
-        }),
-        new VueLoaderPlugin(),
-        new MiniCssExtractPlugin({
-            filename: '[name].css'
-        }),
-        new CopyWebpackPlugin([{
-                from: 'assets',
-                to: 'assets',
-            },
-            {
-                from: 'manifest.json',
-                to: 'manifest.json'
-            },
-            {
-                from: 'assets',
-                to: 'assets'
-            },
-            {
-                from: 'popup/popup.html',
-                to: 'popup/popup.html'
-            },
-            {
-                from: 'options/options.html',
-                to: 'options/options.html'
-            },
-            {
-                from: 'setup/setup.html',
-                to: 'setup/setup.html'
-            }
-        ])
+    extensions: ['*', '.js', '.vue', '.json', '.ts']
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        vendors: false,
+        // vendor chunk
+        vendor: {
+          name: 'vendor',
+          // sync + async chunks
+          chunks: 'all',
+          // import file path containing node_modules
+          test: /node_modules/
+        }
+      }
+    }
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: './assets/',
+          emitFile: false
+        }
+      }
     ]
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      global: 'window'
+    }),
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name]/style.css'
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'assets',
+        to: 'assets'
+      },
+      {
+        from: 'manifest.json',
+        to: 'manifest.json'
+      },
+      {
+        from: 'popup/index.html',
+        to: 'popup/index.html'
+      },
+      {
+        from: 'options/index.html',
+        to: 'options/index.html'
+      },
+      {
+        from: 'setup/index.html',
+        to: 'setup/index.html'
+      }
+    ]),
+
+    new ChromeExtensionReloader()
+  ]
 };

@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import App from './App';
-import router from './router';
 
 global.browser = require('webextension-polyfill');
 Vue.prototype.$browser = global.browser;
 
+const anchor = document.createElement('div');
+document.body.prepend(anchor);
+
 new Vue({
-    el: '#app',
-    router,
-    render: h => h(App),
+  el: anchor,
+  render: h => h(App)
 });

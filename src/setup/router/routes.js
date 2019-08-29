@@ -1,6 +1,8 @@
 import PageIndex from './pages/Index';
 
-export default [{
+export default [
+  {
     path: '/',
-    component: PageIndex,
-}, ];
+    component: PageIndex
+  }
+];

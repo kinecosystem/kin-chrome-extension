@@ -1,5 +1,5 @@
 <template>
-  <p>Setup</p>
+  <p>Session Popup inner html</p>
 </template>
 
 <script>
@@ -10,5 +10,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+p {
+  color: blue;
+}
 </style>
