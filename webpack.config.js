@@ -10,7 +10,7 @@ module.exports = {
     setup: './setup/index.js',
     options: './options/index.js',
     popup: './popup/index.js',
-    'session-popup': './session_popup/index.js',
+    'session-popup': './session-popup/index.js',
     background: './background.ts'
   },
   output: {

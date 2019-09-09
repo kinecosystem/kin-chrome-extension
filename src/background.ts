@@ -1,4 +1,4 @@
-import * as onMessageExternalActions from './message_external_actions';
+import * as onMessageExternalActions from './messageExternalActions';
 import './utils/storage';
 
 // initialize onMessageExternal listeners

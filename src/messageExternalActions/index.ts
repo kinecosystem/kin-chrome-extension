@@ -1,18 +1,22 @@
+import * as REPONSES from '../session-popup/consts';
 import { keystore } from '../utils/storage';
-import { MessageExternalActions } from './actions_consts';
+import { MessageExternalActions } from './actionsConsts';
 const version = require('../../package.json').version;
 
 export const sign = (request, sender, sendResponse) => {
   if (request.action === MessageExternalActions.SIGN) {
+    console.log('extension: SIGN Action');
     chrome.tabs.sendMessage(
       (sender.tab as chrome.tabs.Tab).id || 0,
       { action: MessageExternalActions.SIGN },
       async(respons) => {
-        if (respons === 'ok') {
+        console.log('extension: SIGN Action -> respons from injected!');
+        if (respons === REPONSES.OK) {
           const signedTx = await keystore.sign(
             request.data.accountAddress,
             request.data.transactionEnvelpoe,
           );
+          console.log('extension: SIGN Action -> signed! ' + signedTx);
           sendResponse(signedTx);
         }
       },
