@@ -1,26 +1,22 @@
 <template>
   <div id="app">
-    <h3>JS Counter</h3>
-    <div>{{count}}</div>
+    <h3>Verify Session</h3>
     <div>
-      <button @click="increment()">INCREMENT</button>
+      <button @click="verify()">Verify</button>
     </div>
   </div>
 </template>
 
 <script lang="js">
-export default  {
-  data () {
-    return {
-      count: 0
-    }
-  },
+import Vue from 'vue';
+
+export default Vue.extend({
   methods: {
-    increment() {
-      this.count++
+    verify: function() {
+      this.$parent.verify();
     }
   }
-}
+});
 </script>
 
 

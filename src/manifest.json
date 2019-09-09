@@ -23,8 +23,8 @@
 
   "content_scripts": [
     {
-      "matches": ["*://localhost/*", "*://127.0.0.1/*"],
-      "js": ["content-script/index.js", "session-popup/index.js", "vendor/index.js"],
+      "matches": ["<all_urls>"],
+      "js": ["session-popup/index.js", "vendor/index.js"],
       "css": ["session-popup/style.css"]
     }
   ],

@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div id="app">
     <p>Popup</p>
+    <button @click="setAccount()">Set Account</button>
   </div>
 </template>
 
@@ -8,9 +9,16 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    setAccount: function() {}
   }
 };
 </script>
 
 <style lang="scss">
+#app {
+  width: 150px;
+  height: 300px;
+}
 </style>

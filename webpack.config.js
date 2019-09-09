@@ -10,8 +10,7 @@ module.exports = {
     setup: './setup/index.js',
     options: './options/index.js',
     popup: './popup/index.js',
-    'session-popup': './session-popup/index.js',
-    'content-script': './content_script.ts',
+    'session-popup': './session_popup/index.js',
     background: './background.ts'
   },
   output: {
@@ -22,7 +21,7 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.esm.js'
     },
-    extensions: ['*', '.js', '.vue', '.json', '.ts']
+    extensions: ['.js', '.ts', '.vue', '.json']
   },
   optimization: {
     splitChunks: {
@@ -50,7 +49,10 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/]
+        }
       },
       {
         test: /\.js$/,
