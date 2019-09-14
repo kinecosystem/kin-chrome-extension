@@ -1,6 +1,6 @@
 import { AES, enc, SHA256 } from 'crypto-js';
-import { appStorage } from '../utils/storage';
-import { IDataStore } from './storageProviders';
+import { appStorage } from '.';
+import { IDataStore } from './LocalStorageProvider';
 export class KeystoreHandler {
   constructor(private readonly dataStorage: IDataStore, private readonly storageIndex: string) {}
   /**
@@ -12,7 +12,8 @@ export class KeystoreHandler {
   public async get(): Promise<string[]> {
     const seedsString = await this.dataStorage.get(this.storageIndex);
     const seeds = JSON.parse(seedsString || '[]');
-    return Promise.all(seeds.map((seed) => this.decrypt(seed)));
+    const decrypted = seeds.map(seed => this.decrypt(seed));
+    return Promise.all(decrypted);
   }
 
   /**

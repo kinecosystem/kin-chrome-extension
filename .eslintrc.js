@@ -1,7 +1,7 @@
 module.exports = {
-  extends: ['eslint:recommended', 'plugin:vue/recommended'],
+  extends: ['eslint:recommended', 'plugin:react/recommended'],
   rules: {
-    'vue/no-unused-vars': 'error'
+    'react/no-unused-vars': 'error'
   },
   env: {
     amd: true,

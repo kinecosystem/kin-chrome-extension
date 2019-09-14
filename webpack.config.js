@@ -1,39 +1,31 @@
-const VueLoaderPlugin = require('vue-loader').VueLoaderPlugin;
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ChromeExtensionReloader = require('webpack-chrome-extension-reloader');
 
 module.exports = {
   context: __dirname + '/src',
   entry: {
-    setup: './setup/index.js',
-    options: './options/index.js',
-    popup: './popup/index.js',
-    'session-popup': './session-popup/index.js',
-    background: './background.ts'
+    setup: './setup/index.tsx',
+    options: './options/index.tsx',
+    popup: './popup/index.tsx',
+    'session-popup': './session-popup/index.tsx',
+    background: './background/index.ts'
   },
   output: {
     path: __dirname + '/dist',
     filename: '[name]/index.js'
   },
   resolve: {
-    alias: {
-      vue$: 'vue/dist/vue.esm.js'
-    },
-    extensions: ['.js', '.ts', '.vue', '.json']
+    extensions: ['.js', '.tsx', '.ts']
   },
   optimization: {
     splitChunks: {
       cacheGroups: {
         default: false,
         vendors: false,
-        // vendor chunk
         vendor: {
           name: 'vendor',
-          // sync + async chunks
           chunks: 'all',
-          // import file path containing node_modules
           test: /node_modules/
         }
       }
@@ -43,33 +35,28 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        use: 'vue-loader'
-      },
-      {
-        test: /\.ts$/,
-        loader: 'ts-loader',
+        test: /\.ts(x?)$/,
         exclude: /node_modules/,
-        options: {
-          appendTsSuffixTo: [/\.vue$/]
-        }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
+        use: [
+          {
+            loader: 'ts-loader'
+          }
+        ]
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        exclude: /node_modules/,
+        use: ['css-loader']
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+        exclude: /node_modules/,
+        use: ['css-loader', 'sass-loader']
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
         loader: 'file-loader',
+        exclude: /node_modules/,
         options: {
           name: '[name].[ext]',
           outputPath: './assets/',
@@ -81,10 +68,6 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       global: 'window'
-    }),
-    new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name]/style.css'
     }),
     new CopyWebpackPlugin([
       {

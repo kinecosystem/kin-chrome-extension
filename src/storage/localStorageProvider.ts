@@ -13,8 +13,8 @@ export class StorageProvider implements IDataStore {
    * @memberof StorageProvider
    */
   public async get(key: string, def?: string): Promise<string> {
-    return new Promise((resolve) => {
-      chrome.storage.local.get(key, (result) => {
+    return new Promise(resolve => {
+      chrome.storage.local.get(key, result => {
         if (def && !result[key]) {
           resolve(def);
         } else {
@@ -33,7 +33,7 @@ export class StorageProvider implements IDataStore {
    * @memberof StorageProvider
    */
   public async set(key: string, value: string): Promise<void> {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const item = {};
       item[key] = value;
       chrome.storage.local.set(item, resolve);
