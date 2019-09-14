@@ -8,7 +8,8 @@ module.exports = {
     setup: './setup/index.tsx',
     options: './options/index.tsx',
     popup: './popup/index.tsx',
-    'session-popup': './session-popup/index.tsx',
+    'session-popup': './session-popup/index.ts',
+    'content-scripts': './content-scripts/index.ts',
     background: './background/index.ts'
   },
   output: {
@@ -16,7 +17,7 @@ module.exports = {
     filename: '[name]/index.js'
   },
   resolve: {
-    extensions: ['.js', '.tsx', '.ts']
+    extensions: ['.js', '.ts', '.tsx']
   },
   optimization: {
     splitChunks: {
@@ -42,6 +43,11 @@ module.exports = {
             loader: 'ts-loader'
           }
         ]
+      },
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        loader: 'source-map-loader'
       },
       {
         test: /\.css$/,
@@ -89,6 +95,10 @@ module.exports = {
       {
         from: 'setup/index.html',
         to: 'setup/index.html'
+      },
+      {
+        from: 'session-popup/index.html',
+        to: 'session-popup/index.html'
       }
     ]),
 

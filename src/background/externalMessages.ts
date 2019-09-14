@@ -1,45 +1,57 @@
-import { SignVerificationAction } from '../session-popup';
 import { keystore } from '../Storage';
+import { InternalAction } from './InternalMessages';
 const version = require('../../package.json').version;
 
-export enum MessageExternalActions {
+export enum ExternalActions {
   IS_INSTALLED = 'IS_INSTALLED',
   ACCOUNTS = 'ACCOUNTS',
-  SIGN = 'SIGN'
+  SIGN = 'SIGN',
+  ACTIVE_SESSINO = 'ACTIVE_SESSINO'
 }
 
-export const sign = (request, sender, sendResponse) => {
-  if (request.action === MessageExternalActions.SIGN) {
-    console.log('extension: SIGN Action');
+export const echo = (request, sender, sendResponse) => {
+  console.log({ request, sender, sendResponse });
+};
+
+export const activateSession = (request, sender, sendResponse) => {
+  if (request.action === ExternalActions.ACTIVE_SESSINO) {
+    console.log('extension : tip -> ACTIVE_SESSINO');
     chrome.tabs.sendMessage(
       (sender.tab as chrome.tabs.Tab).id || 0,
-      { action: MessageExternalActions.SIGN },
-      async respons => {
-        console.log('extension: SIGN Action -> respons from injected!');
-        if (respons === SignVerificationAction.OK) {
-          const signedTx = await keystore.sign(
-            request.data.accountAddress,
-            request.data.transactionEnvelpoe
-          );
-          console.log('extension: SIGN Action -> signed! ' + signedTx);
-          sendResponse(signedTx);
+      { action: InternalAction.ACTIVATE_SESSION },
+      respons => {
+        if (respons) {
+          console.log('extension : tip -> ACTIVE_SESSINO Done!');
+          console.log(respons);
+          sendResponse('Extension: ACTIVE_SESSINO respons');
         }
       }
     );
+
+    return true;
+  }
+};
+
+export const sign = (request, sender, sendResponse) => {
+  if (request.action === ExternalActions.SIGN) {
+    keystore.sign(request.data.accountAddress, request.data.transactionEnvelpoe).then(signedTx => {
+      console.log('extension: SIGN Action -> signed! ' + signedTx);
+      sendResponse(signedTx);
+    });
     return true;
   }
 };
 
 export const isInstalled = (request, _, sendResponse) => {
-  if (request.action === MessageExternalActions.IS_INSTALLED) {
+  if (request.action === ExternalActions.IS_INSTALLED) {
     sendResponse({ version });
   }
 };
 
 export const getAccounts = async(request, _, sendResponse) => {
-  if (request.action === MessageExternalActions.ACCOUNTS) {
+  if (request.action === ExternalActions.ACCOUNTS) {
     const accounts = await keystore.accounts;
     sendResponse(accounts);
+    return true;
   }
-  return true;
 };
