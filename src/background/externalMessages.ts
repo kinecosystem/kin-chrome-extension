@@ -18,7 +18,7 @@ export const activateSession = (request, sender, sendResponse) => {
     console.log('extension : tip -> ACTIVE_SESSINO');
     chrome.tabs.sendMessage(
       (sender.tab as chrome.tabs.Tab).id || 0,
-      { action: InternalAction.ACTIVATE_SESSION },
+      { action: InternalAction.ACTIVATE_SESSION, tabid: sender.tab.id },
       respons => {
         if (respons) {
           console.log('extension : tip -> ACTIVE_SESSINO Done!');

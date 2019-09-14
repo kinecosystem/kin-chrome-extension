@@ -3,7 +3,7 @@
 
   "name": "Kin Wallet Chrome Extension",
   "description": "Kin Extension, Kin Ecosystem",
-  "version": "1.0",
+  "version": "1.0.2",
 
   "options_ui": {
     "page": "options/index.html",
@@ -23,7 +23,7 @@
 
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["*://localhost/*", "*://127.0.0.1/*"],
       "js": ["content-scripts/index.js", "vendor/index.js"]
     }
   ],
@@ -32,5 +32,5 @@
     "scripts": ["background/index.js", "vendor/index.js"]
   },
 
-  "permissions": ["storage", "tabs", "cookies", "<all_urls>"]
+  "permissions": ["storage", "tabs", "cookies", "*://localhost/*", "*://127.0.0.1/*"]
 }

@@ -22,6 +22,6 @@ Object.values(externalMessages).forEach(action => {
 
 chrome.runtime.onInstalled.addListener(details => {
   if (details.reason === 'install' || details.reason === 'update') {
-    // chrome.tabs.create({ url: './setup/index.html' });
+    chrome.tabs.create({ url: './setup/index.html' });
   }
 });

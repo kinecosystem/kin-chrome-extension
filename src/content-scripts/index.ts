@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       'position: fixed !important; z-index: 2147483647 !important; display: block !important; width: 100% !important; height: 100% !important; top: 10px !important; right: 10px !important; max-height: 182px !important; max-width: 368px !important;';
 
     const iframe = document.createElement('iframe') as HTMLIFrameElement;
-    iframe.src = 'chrome-extension://ajibgglefmgckbegajkboddpjkokdkae/session-popup/index.html';
+    iframe.src = `chrome-extension://${chrome.runtime.id}/session-popup/index.html?tabid=${request.tabid}`;
     iframe.scrolling = 'no';
     iframe.style.cssText =
       'border: 1px solid; background: white; position: relative !important; top: 0px !important; right: 0px !important; bottom: 0px !important; left: 0px !important; height: 100% !important; width: 100% !important; visibility: visible !important; display: block !important;';

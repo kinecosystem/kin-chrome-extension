@@ -9,8 +9,8 @@ export class AppStorage {
 
   public get environmen(): Promise<string> {
     return new Promise(async resolve => {
-      const defaultEnv =
-        process.env.NODE_ENV === 'production' ? Environment.Production : Environment.Testnet;
+      const defaultEnv = Environment.Testnet;
+      // process.env.NODE_ENV === 'production' ? Environment.Production : Environment.Testnet;
       resolve(await this.dataStorage.get(ENVIRONMENT, defaultEnv.passphrase));
     });
   }
