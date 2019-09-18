@@ -1,4 +1,4 @@
-import { Environment } from '@kinecosystem/kin-sdk-js';
+import { Environment } from '@kinecosystem/kin-sdk-js-common';
 import { IDataStore } from './LocalStorageProvider';
 
 const ENVIRONMENT = 'ENVIRONMENT';
